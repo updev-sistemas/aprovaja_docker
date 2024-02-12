@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  webapp:
+    build:
+      context: ./WebApp
+      dockerfile: Dockerfile
+    image: falecomoantonio/aprovaja_webapp:latest
+    container_name: aprovaja_webapp
+    ports:
+      - "7896:7896"
+    volumes:
+      - .:/webapp
+    networks:
+      - aprovajanet
+
+  webapi:
+    build:
+      context: ./WebApi
+      dockerfile: Dockerfile
+    image: falecomoantonio/aprovaja_webapi:latest
+    container_name: aprovaja_webapi
+    ports:
+      - "7895:7895"
+    volumes:
+      - .:/webapi
+    networks:
+      - aprovajanet
+
+networks:
+  aprovajanet:
+    driver: bridge
